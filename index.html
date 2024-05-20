@@ -45,11 +45,14 @@
           '<tr>' +
           '<th>' + nomor + '</th>' +
           '<td>' + data.nama + '</td>' +
-          '<td>' + formatAngka(data.harga) + '</td>' +
-          '<td>' + data.stok + '</td>' +
-          '<td>' + '<button class="btn btn-danger tombol-hapus" data="' + data.id + '">Hapus</button>' + 
-          '<img src="loader.gif" style="width: 1em; display: none" id="' + data.id + '">' +
-          '</td>' +
+          '<td>' + data.harga + '</td>' +
+          '<td>' + data.stok + '</td>' + '<td class="stack-up">' +
+          ' <a href="#" class="me-2 link-ubah"  data="' +
+          data.id +
+          '">ubah</a> ' +
+          ' <button class="btn btn-danger tombol-hapus" data="' +
+          data.id +
+          '">Hapus</button>' + '</td>' +
           '</tr>'
         );
         nomor = nomor + 1;
@@ -57,12 +60,15 @@
 
       $('#loader').hide();
 
-      $('.tombol-hapus').click(async function() {
+          $('.tombol-hapus').click(async function() {
         $(this).attr('disabled', 'disabled');
         $('#' + $(this).attr('data')).show();
         await hapusProduk($(this).attr('data'));
         location.reload();
-      });
+      })
+      $('.link-ubah').click(async function() {
+        window.location.replace('ubah-produk.html?docId=' + $(this).attr('data'));
+      })
 
     });
   </script>
